@@ -3,8 +3,8 @@ import './Characters.css'
 
 const chars = (props) => {
   return (
-    <div className='char'>
-      <p onClick={props.click}>{props.singleChar}</p>
+    <div className='char' onClick={props.click}>
+      <p>{props.singleChar}</p>
     </div>
   )
 }

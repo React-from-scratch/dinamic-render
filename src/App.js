@@ -6,46 +6,35 @@ import Chars from './Characters/Characters'
 class App extends Component {
 
   state = {
-    char: String,
-    length: Number
+    char: '',
   }
 
   handleChange = (event) => {
     this.setState({
       char: event.target.value,
-      length: event.target.value.length,
     })
   }
 
   deleteCharHandler = (charIndex) => {
-    const newChar = [...this.state.char]
+    const newChar = this.state.char.split('')
     newChar.splice(charIndex, 1)
-    this.setState({char: newChar.join('')})
+    const charUpdate = newChar.join('')
+    this.setState({char: charUpdate})
   }
   
   render () {
+    let singleCharacter = this.state.char.split('').map((e, index) => {
+      return <Chars 
+        click={() => this.deleteCharHandler(index)}
+        key={index}
+        singleChar={e} />
+    });
 
-    let singleCharacter = 'a';
-    console.log(this.state.length)
-    if(this.state.length >= 0) {
-      singleCharacter = (
-        <div>
-          {this.state.char.split('').forEach((e, index) => {
-            return <Chars 
-            click={() => this.deleteCharHandler(index)}
-            singleChar={e} /> 
-          })}
-        </div>
-      )
-    }
-    console.log(singleCharacter)
     return (
       <div className='App'>
-        <input type='text' onChange={this.handleChange} />
-        <p>{this.state.length}</p>
+        <input type='text' onChange={this.handleChange} value={this.state.char}/>
         <Validation char={this.state.char} />
-        {/* {singleCharacter} */}
-        <Chars singleChar={this.state.char}/>
+        {singleCharacter}
       </div>
     )
   }

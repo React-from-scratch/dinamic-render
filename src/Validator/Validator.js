@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Validation = (props) => {
+const validation = (props) => {
   let isLong = ''
   props.char.length < 5 ? isLong = 'Text too short' : isLong = 'Text long enough'
   return (
-    <div >
+    <div>
       <p>{isLong}</p>
     </div>
   )
 }
 
-export default Validation
+export default validation
